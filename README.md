@@ -83,6 +83,25 @@ We support training models with either DDP or DeepSpeed (ZeRO-2 and ZeRO-3). To 
 
 ### SFT
 
+#### Google Colab
+To run SFT on google colab modify the original command as follows:
+```shell
+!accelerate launch src/open_r1/sft.py \
+    --model_name_or_path ewre324/ewre324-Thinker-SmolLM2-135M-Instruct-Reasoning \
+    --dataset_name HuggingFaceH4/Bespoke-Stratos-17k \
+    --learning_rate 2.0e-5 \
+    --num_train_epochs 1 \
+    --max_seq_length 2048 \
+    --per_device_train_batch_size 1 \
+    --gradient_accumulation_steps 4 \
+    --gradient_checkpointing \
+    --fp16 \
+    --logging_steps 5 \
+    --eval_strategy steps \
+    --eval_steps 200 \
+    --output_dir data/ewre324-R1-SmolLM2-135M-Instruct-Reasoning
+  ```
+Original command was below:
 To run SFT on a dataset distilled from DeepSeek-R1 with reasoning traces such as [Bespoke-Stratos-17k](https://huggingface.co/datasets/bespokelabs/Bespoke-Stratos-17k), run:
 
 ```shell
